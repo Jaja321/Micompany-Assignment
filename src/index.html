@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My first Vue app</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/chart.js@2.7.2/dist/Chart.bundle.js"></script>
+  <script src="https://unpkg.com/vue-chartkick@0.5.0"></script>
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/base-min.css">
+  <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+<body>
+  <div style="width: 100%; height: 35px; background-color:black; margin-bottom: 5px; padding-top:5px;">
+    <h3 style="color:white; margin-top: 0px; margin-left:5px;">MInternet Case</h3>
+  </div>
+  <div id="app" style="display: flex;">
+  <div>
+    <div style="margin-bottom: 5px;">
+        <span>Sort by: </span>
+        <select v-model="sortBy">
+          <option>ID</option>
+          <option>Number of complaints</option>
+        </select>
+        <span>Filter segment: </span>
+        <select v-model="filterBySegment">
+          <option value="0">All Segments</option>
+          <option v-for="n in 5">{{ n }}</option>
+        </select>
+    </div>
+    <table class="pure-table">
+        <thead>
+           <tr>
+            <th>ID</th>
+            <th>Gender</th>
+            <th>Segment</th>
+            <th>Years</th>
+            <th>Complaints</th>
+            <th>Contract value</th>
+           </tr>
+        </thead>
+        <tbody>
+           <tr v-for="row in sortedTable">
+            <td>{{ row.id }}</td>
+            <td>{{ row.gender }}</td>
+            <td>{{ row.segment }}</td>
+            <td>{{ row.years_customer }}</td>
+            <td>{{ row.no_of_complaints }}</td>
+            <td>{{ row.contract_value }}</td>
+           </tr>
+        </tbody>
+    </table>
+    </div>
+    <div style="flex-grow: 1;">
+        <scatter-chart height="500px" :dataset="{pointBackgroundColor: dataColor, pointBorderColor:dataColor}" :data="chartData" xtitle="Years customer" ytitle="Number of complaints"></scatter-chart>
+    </div>
+  </div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
